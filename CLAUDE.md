@@ -139,6 +139,18 @@ Prefer these patterns:
 - Commit early and often with meaningful messages
 - Never point tools at directories outside this project
 
+## Key Decisions Made
+
+### Day 1 (2025-11-01) - Foundation
+1. **Source Strategy**: OpenBible.info + Pleiades Gazetteer as primary authoritative sources
+2. **Uncertainty Handling**: Multi-hypothesis approach with confidence scoring (0.2-1.0 scale)
+3. **Coordinate Standards**: WGS84 format, 4 decimal precision (~11m accuracy)
+4. **Quality Standards**:
+   - GeoJSON must include explicit CRS property
+   - Geometry set to null for low-confidence locations
+   - Confidence methodology documented in schema
+5. **Agent Workflow**: Created three specialized agents (Session Closer, Research Guru, Brutal Critic)
+
 ## Session Workflow
 
 ### Daily Ritual
@@ -157,7 +169,20 @@ Prefer these patterns:
 
 ## Open Questions (Current)
 
+### Map Implementation (Priority for Day 2)
+- Map library: Leaflet vs MapLibre GL JS - which better suits project needs?
+- Tile provider: OpenStreetMap vs Mapbox vs Stamen - what licensing constraints?
+- Uncertainty visualization: How to represent multiple location hypotheses on the map?
+- Confidence levels: Best practices for visual representation?
+
+### Route Visualization
+- How to visualize Joshua's campaign route from Josh 10:9-43?
+- Should routes be symbolic or attempt historical accuracy?
+
+### Temporal Context
+- Should we show multiple time periods (Late Bronze vs Iron Age)?
+- How to handle coordinates that may have changed over millennia?
+
+### Data Expansion
 - Primary open datasets for ancient Near East geography (GeoJSON/CSV)?
-- Best approach to route reconstruction vs. symbolic paths?
-- How to encode multiple scholarly opinions per site?
-- Tile provider selection and licensing considerations?
+- How to encode multiple scholarly opinions per site? (Addressed: using hypotheses array)

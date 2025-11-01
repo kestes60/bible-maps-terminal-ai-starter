@@ -13,3 +13,6 @@ dist/
 # env
 .env
 .env.*
+
+# Claude Code workspace
+.claude/
