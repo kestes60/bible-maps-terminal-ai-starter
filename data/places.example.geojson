@@ -1,0 +1,37 @@
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "gib-001",
+      "properties": {
+        "label": "Gibeon",
+        "alt_names": ["Giv'on"],
+        "type": "city",
+        "scripture_refs": ["Josh 10:1-5"],
+        "sources": ["OpenBible", "Pleiades"],
+        "hypotheses": [
+          {"coords": [35.168, 31.857], "confidence": 0.8, "source": "OpenBible", "notes": "Widely accepted location."},
+          {"coords": [35.160, 31.865], "confidence": 0.4, "source": "AltScholarly", "notes": "Alternate proposed mound."}
+        ],
+        "notes": "All coords WGS84.",
+        "last_updated": "2025-11-01T00:00:00Z"
+      },
+      "geometry": { "type": "Point", "coordinates": [35.168, 31.857] }
+    },
+    {
+      "type": "Feature",
+      "id": "lac-001",
+      "properties": {
+        "label": "Lachish",
+        "type": "city",
+        "scripture_refs": ["Josh 10:31-32"],
+        "sources": ["OpenBible"],
+        "hypotheses": [],
+        "last_updated": "2025-11-01T00:00:00Z"
+      },
+      "geometry": { "type": "Point", "coordinates": [34.826, 31.562] }
+    }
+  ]
+}

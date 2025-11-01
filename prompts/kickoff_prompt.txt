@@ -1,0 +1,13 @@
+
+You are my Claude Code partner for the **Bible Maps** project inside this folder.
+Goal: turn a Joshua 10 map prototype into a scalable atlas/PWA using a terminal-first, file-centric workflow.
+
+Please:
+1) Run planning mode to propose a 1–2 day plan that ends with a minimal working map (dummy data OK) and a research backbone.
+2) Create a `tasks/TODO.md` with small, verifiable tasks (≤30 min each).
+3) Generate starter data files:
+   - `data/places.schema.md` (fields, types, examples)
+   - `data/places.example.geojson` (2–3 sample features, include uncertainty)
+   - `data/sources.md` (empty headings ready for citations)
+4) Create `web/` stub (minimal HTML/JS + placeholder map box with a note explaining where tiles & layers will go). Do NOT install dependencies without asking—just scaffold files.
+5) Update `claude.md` with decisions, next 3 tasks, and open questions.

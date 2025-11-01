@@ -1,0 +1,15 @@
+
+# node / web stuff
+node_modules/
+dist/
+.build/
+.next/
+.vercel/
+.netlify/
+
+# OS
+.DS_Store
+
+# env
+.env
+.env.*
