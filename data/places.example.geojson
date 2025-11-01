@@ -10,24 +10,27 @@
         "type": "city",
         "scripture_refs": ["Josh 10:1-5", "Josh 10:12"],
         "sources": ["Pleiades", "OpenBible"],
+        "uncertainty_radius_m": 50,
         "hypotheses": [
           {
-            "coords": [35.184362, 31.849056],
+            "coords": [35.1844, 31.8491],
             "confidence": 0.95,
             "source": "Pleiades",
-            "notes": "Pleiades ID 687900. Widely accepted identification with high scholarly consensus (>95%)."
+            "notes": "Pleiades ID 687900. Widely accepted identification with high scholarly consensus (>95%).",
+            "uncertainty_radius_m": 50
           },
           {
-            "coords": [35.183351, 31.847451],
+            "coords": [35.1834, 31.8475],
             "confidence": 0.92,
             "source": "OpenBible",
-            "notes": "OpenBible confidence: 91.7%. Minor coordinate variation from Pleiades."
+            "notes": "OpenBible confidence: 91.7%. Minor coordinate variation from Pleiades.",
+            "uncertainty_radius_m": 100
           }
         ],
-        "notes": "Modern site el-Jib (Al-Jib), West Bank. Located 9km NW of Jerusalem. All coords WGS84.",
+        "notes": "Modern site el-Jib (Al-Jib), West Bank. Located 9km NW of Jerusalem.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [35.184362, 31.849056] }
+      "geometry": { "type": "Point", "coordinates": [35.1844, 31.8491] }
     },
     {
       "type": "Feature",
@@ -38,18 +41,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:1", "Josh 10:3"],
         "sources": ["Pleiades"],
+        "uncertainty_radius_m": 10,
         "hypotheses": [
           {
-            "coords": [35.234156, 31.776679],
+            "coords": [35.2342, 31.7767],
             "confidence": 1.0,
             "source": "Pleiades",
-            "notes": "Pleiades ID 687928. Precise location (±5-10m accuracy). City of David archaeological site represents core settlement."
+            "notes": "Pleiades ID 687928. Precise location (±5-10m accuracy). City of David archaeological site represents core settlement.",
+            "uncertainty_radius_m": 10
           }
         ],
         "notes": "Jerusalem Old City. One of the five Amorite kings who formed coalition against Gibeon. Ruled by King Adoni-Zedek.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [35.234156, 31.776679] }
+      "geometry": { "type": "Point", "coordinates": [35.2342, 31.7767] }
     },
     {
       "type": "Feature",
@@ -60,18 +65,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:3", "Josh 10:36-37"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
-            "coords": [35.108, 31.529],
+            "coords": [35.1080, 31.5290],
             "confidence": 0.9,
             "source": "OpenBible",
-            "notes": "Tel Hebron (Tel Rumeida), Hebron, West Bank. Elevation 936m. Extensive Bronze Age fortifications documented."
+            "notes": "Tel Hebron (Tel Rumeida), Hebron, West Bank. Elevation 936m. Extensive Bronze Age fortifications documented.",
+            "uncertainty_radius_m": 100
           }
         ],
         "notes": "Ruled by King Hoham. Massive Middle Bronze Age II (1750-1550 BCE) city wall documented. Multiple conquest traditions in biblical text.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [35.108, 31.529] }
+      "geometry": { "type": "Point", "coordinates": [35.1080, 31.5290] }
     },
     {
       "type": "Feature",
@@ -82,18 +89,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:3", "Josh 10:23"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
-            "coords": [34.997, 31.717],
+            "coords": [34.9970, 31.7170],
             "confidence": 0.85,
             "source": "OpenBible",
-            "notes": "Tel Yarmut, Israel. 26km WSW of Jerusalem, Shephelah region. Elevation 405m. Now Israeli National Park."
+            "notes": "Tel Yarmut, Israel. 26km WSW of Jerusalem, Shephelah region. Elevation 405m. Now Israeli National Park.",
+            "uncertainty_radius_m": 100
           }
         ],
         "notes": "Ruled by King Piram. Led coalition against Gibeon with other four Amorite kings.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [34.997, 31.717] }
+      "geometry": { "type": "Point", "coordinates": [34.9970, 31.7170] }
     },
     {
       "type": "Feature",
@@ -104,18 +113,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:3", "Josh 10:31-32"],
         "sources": ["OpenBible", "Pleiades"],
+        "uncertainty_radius_m": 50,
         "hypotheses": [
           {
-            "coords": [34.849, 31.565],
+            "coords": [34.8490, 31.5650],
             "confidence": 1.0,
             "source": "OpenBible",
-            "notes": "Tel Lachish (Tell el-Duweir), Israel. 40km SW of Jerusalem. Extensively excavated, 100% scholarly consensus."
+            "notes": "Tel Lachish (Tell el-Duweir), Israel. 40km SW of Jerusalem. Extensively excavated, 100% scholarly consensus.",
+            "uncertainty_radius_m": 50
           }
         ],
         "notes": "Ruled by King Japhia. Major fortified city, Israeli National Park. Extensive archaeological documentation from Starkey (1932-38) and Tel Aviv University (1973-87) excavations.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [34.849, 31.565] }
+      "geometry": { "type": "Point", "coordinates": [34.8490, 31.5650] }
     },
     {
       "type": "Feature",
@@ -126,18 +137,21 @@
         "type": "city",
         "scripture_refs": ["Josh 10:3", "Josh 10:34-35"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
             "coords": [34.9284, 31.4897],
             "confidence": 0.85,
             "source": "OpenBible",
-            "notes": "Tel 'Eton (Tel Aitun), Israel. Current scholarly consensus. Third largest site in Judah after Jerusalem and Lachish. 12km SE of Lachish, 17km SW of Hebron."
+            "notes": "Tel 'Eton (Tel Aitun), Israel. Current scholarly consensus. Third largest site in Judah after Jerusalem and Lachish. 12km SE of Lachish, 17km SW of Hebron.",
+            "uncertainty_radius_m": 100
           },
           {
-            "coords": [34.792, 31.509],
+            "coords": [34.7920, 31.5090],
             "confidence": 0.2,
             "source": "OpenBible",
-            "notes": "Tel el-Hesi. Albright's 1924 identification, now rejected by most scholars in favor of Tel 'Eton."
+            "notes": "Tel el-Hesi. Albright's 1924 identification, now rejected by most scholars in favor of Tel 'Eton.",
+            "uncertainty_radius_m": 200
           }
         ],
         "notes": "Ruled by King Debir. Scholarly identification shifted from Tel el-Hesi (outdated) to Tel 'Eton (current consensus).",
@@ -154,24 +168,27 @@
         "type": "city",
         "scripture_refs": ["Josh 10:38-39"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
-            "coords": [35.017, 31.417],
+            "coords": [35.0170, 31.4170],
             "confidence": 0.85,
             "source": "OpenBible",
-            "notes": "Khirbet Rabud, West Bank. Current scholarly consensus based on Moshe Kochavi excavations (1968-69). Only Late Bronze Age city south of Jerusalem with upper/lower water sources."
+            "notes": "Khirbet Rabud, West Bank. Current scholarly consensus based on Moshe Kochavi excavations (1968-69). Only Late Bronze Age city south of Jerusalem with upper/lower water sources.",
+            "uncertainty_radius_m": 100
           },
           {
-            "coords": [34.876, 31.413],
+            "coords": [34.8760, 31.4130],
             "confidence": 0.15,
             "source": "OpenBible",
-            "notes": "Tell Beit Mirsim. Albright's identification, now abandoned by most scholars in favor of Khirbet Rabud."
+            "notes": "Tell Beit Mirsim. Albright's identification, now abandoned by most scholars in favor of Khirbet Rabud.",
+            "uncertainty_radius_m": 150
           }
         ],
         "notes": "13km SW of Hebron. Scholarly identification shifted from Tell Beit Mirsim (Albright) to Khirbet Rabud (Kochavi 1968-69).",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [35.017, 31.417] }
+      "geometry": { "type": "Point", "coordinates": [35.0170, 31.4170] }
     },
     {
       "type": "Feature",
@@ -182,24 +199,27 @@
         "type": "city",
         "scripture_refs": ["Josh 10:10", "Josh 10:16", "Josh 10:28"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": null,
         "hypotheses": [
           {
-            "coords": [34.95, 31.55],
+            "coords": [34.9500, 31.5500],
             "confidence": 0.4,
             "source": "OpenBible",
-            "notes": "Khirbet el-Qom. Possible identification, 14km W of Hebron. Idumean ostraca mention 'Maqqedah'."
+            "notes": "Khirbet el-Qom. Possible identification, 14km W of Hebron. Idumean ostraca mention 'Maqqedah'.",
+            "uncertainty_radius_m": 2000
           },
           {
-            "coords": [34.93, 31.58],
+            "coords": [34.9300, 31.5800],
             "confidence": 0.3,
             "source": "OpenBible",
-            "notes": "Khirbet el-Kheishum. Alternative proposed location. No scholarly consensus."
+            "notes": "Khirbet el-Kheishum. Alternative proposed location. No scholarly consensus.",
+            "uncertainty_radius_m": 2000
           }
         ],
         "notes": "UNCERTAIN LOCATION. Cave tradition important (5 kings hid in cave, Josh 10:16-27). Multiple proposed locations, no current scholarly consensus.",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [34.95, 31.55] }
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -210,18 +230,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:29-30"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
-            "coords": [34.819, 31.698],
+            "coords": [34.8190, 31.6980],
             "confidence": 0.85,
             "source": "OpenBible",
-            "notes": "Tel Burna, Israel. High scholarly confidence (W. Albright, Y. Aharoni, excavation team consensus). 35km SW of Jerusalem, Shephelah region."
+            "notes": "Tel Burna, Israel. High scholarly confidence (W. Albright, Y. Aharoni, excavation team consensus). 35km SW of Jerusalem, Shephelah region.",
+            "uncertainty_radius_m": 100
           }
         ],
         "notes": "One of 13 Kohanic cities. Late Bronze Age cultic finds support Canaanite occupation. Border between Judah and Philistia. Excavated by Ariel University (2010-2024).",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [34.819, 31.698] }
+      "geometry": { "type": "Point", "coordinates": [34.8190, 31.6980] }
     },
     {
       "type": "Feature",
@@ -232,18 +254,20 @@
         "type": "city",
         "scripture_refs": ["Josh 10:10-11"],
         "sources": ["OpenBible"],
+        "uncertainty_radius_m": 100,
         "hypotheses": [
           {
-            "coords": [34.949, 31.701],
+            "coords": [34.9490, 31.7010],
             "confidence": 0.9,
             "source": "OpenBible",
-            "notes": "Tel Azekah (Tell Zakariyeh), Israel. 26km NW of Hebron, Elah Valley. Elevation 347m. Strategic location, extensively excavated."
+            "notes": "Tel Azekah (Tell Zakariyeh), Israel. 26km NW of Hebron, Elah Valley. Elevation 347m. Strategic location, extensively excavated.",
+            "uncertainty_radius_m": 100
           }
         ],
         "notes": "Scene of David vs Goliath. Destroyed by Sennacherib 701 BCE. LMLK seals found. Israeli National Park (Britannia Park). Excavations by Bliss & Macalister (1897-1900) and Lautenschläger Expedition (2012-present).",
         "last_updated": "2025-11-01T00:00:00Z"
       },
-      "geometry": { "type": "Point", "coordinates": [34.949, 31.701] }
+      "geometry": { "type": "Point", "coordinates": [34.9490, 31.7010] }
     }
   ]
 }

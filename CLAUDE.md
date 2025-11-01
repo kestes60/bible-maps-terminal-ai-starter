@@ -138,6 +138,7 @@ Prefer these patterns:
 - Review file writes/commands with permissions ON
 - Commit early and often with meaningful messages
 - Never point tools at directories outside this project
+- **Coordinates are WGS84 (EPSG:4326) in [longitude, latitude] order per RFC 7946**
 
 ## Key Decisions Made
 

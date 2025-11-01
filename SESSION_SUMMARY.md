@@ -4,6 +4,54 @@ Rolling summaries of work sessions. Latest at top.
 
 ---
 
+## Session: Day 2 Critical Fixes - RFC 7946 Compliance
+**Date**: 2025-11-01
+**Time**: Critical fixes mini-session
+
+### What Changed
+
+#### Files Modified:
+1. **CLAUDE.md** - Added RFC 7946 coordinate system guardrail
+   - WGS84 implicit (no explicit CRS object per RFC 7946)
+   - Added validation checkpoint for coordinate standards
+
+2. **data/places.schema.md** - Enhanced documentation
+   - RFC 7946 coordinate system compliance documented
+   - Confidence methodology fully explained (consensus-based 0.2-1.0 scale)
+   - Added uncertainty_radius_m specification
+
+3. **data/places.example.geojson** - Normalized all data
+   - All coordinates standardized to 4 decimal places (~11m accuracy)
+   - Added uncertainty_radius_m values (10m, 50m, 100m, 2000m)
+   - Set Makkedah geometry to null (confidence 0.2 < 0.5 threshold)
+
+### Key Decisions Made
+
+1. **RFC 7946 Compliance**:
+   - No explicit CRS object - WGS84 implicit per standard
+   - MUST NOT include "crs" property (violates spec)
+
+2. **Coordinate Precision**:
+   - 4 decimal places standard (~11m accuracy)
+   - Removes false precision while maintaining practical accuracy
+
+3. **Confidence-Based Geometry**:
+   - geometry: null when confidence < 0.5
+   - Explicit uncertainty via uncertainty_radius_m field
+
+4. **Uncertainty Radius Values**:
+   - 10m: Precise archaeological sites (Jerusalem, Hebron)
+   - 50-100m: Well-identified tells with survey data
+   - 2000m: Very uncertain locations (search radius for debates)
+
+### Next 3 Tasks
+
+1. **Add AIBA as default source** - Update sources.md and Research Guru
+2. **Choose map library** - Leaflet vs MapLibre GL JS decision for MVP
+3. **Begin Day 2 Phase 1** - Map library implementation
+
+---
+
 ## Session: Day 1 - Foundation and Data Collection
 **Date**: 2025-11-01
 **Time**: End-of-session
