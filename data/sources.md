@@ -193,6 +193,21 @@ This document contains full citations for all sources used in identifying and lo
 - **BibleWalks**: https://www.biblewalks.com/
 - **Israel Nature and Parks Authority**: Archaeological site documentation
 
+### Armstrong Institute of Biblical Archaeology (AIBA)
+**Title**: Armstrong Institute of Biblical Archaeology
+**Organization**: Armstrong Institute (Gerald R. Flurry)
+**URL**: https://armstronginstitute.org/
+**Key Resources**:
+- Interactive map of Israel's biblical history
+- "Let the Stones Speak" magazine
+- Excavation reports (City of David, Ophel, Temple Mount area)
+- Archaeological infographics and video documentaries
+**Focus**: Biblical archaeology, Jerusalem excavations, connecting archaeological evidence to biblical narratives
+**License**: Copyright © 2025 Gerald R. Flurry, All Rights Reserved (attribution required)
+**Date Accessed**: 2025-11-01
+**Citation Key**: AIBA
+**Relevance**: Jerusalem and southern kingdom sites, archaeological context for biblical events
+
 ### Academic Resources
 - Tel Aviv University Institute of Archaeology
 - Bar Ilan University Archaeological Research

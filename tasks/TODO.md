@@ -9,11 +9,17 @@
 - [x] Validate data against schema using Brutal Critic
 
 ## Critical Fixes from Brutal Critic (Priority)
-- [ ] Add explicit CRS property to GeoJSON (2 min)
-- [ ] Standardize coordinate precision to 4 decimals (3 min)
-- [ ] Add uncertainty_radius_m property to all features (4 min)
-- [ ] Set geometry to null for uncertain locations (Makkedah) (3 min)
-- [ ] Add confidence score methodology to schema documentation (5 min)
+- [x] Add explicit CRS property to GeoJSON (2 min) - COMPLETE: RFC 7946 compliance (no CRS object)
+- [x] Standardize coordinate precision to 4 decimals (3 min) - COMPLETE
+- [x] Add uncertainty_radius_m property to all features (4 min) - COMPLETE
+- [x] Set geometry to null for uncertain locations (Makkedah) (3 min) - COMPLETE
+- [x] Add confidence score methodology to schema documentation (5 min) - COMPLETE
+
+## AIBA Source Integration
+- [x] Add AIBA to data/sources.md with full citation
+- [x] Update CLAUDE.md with AIBA as default reference source
+- [x] Update Research Guru agent guidelines to include AIBA
+- [ ] Review AIBA content for Joshua 10 sites and extract citations/alternate hypotheses (60 min)
 
 ## Day 2: Interactive Map Prototype
 

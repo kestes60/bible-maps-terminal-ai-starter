@@ -125,6 +125,12 @@ Every data point must trace to `data/sources.md` with:
 - License information
 - Date accessed (for web sources)
 
+**Default Reference Sources** (consult these first):
+- OpenBible.info (biblical geography with confidence ratings)
+- Pleiades Gazetteer (peer-reviewed ancient world locations)
+- Armstrong Institute of Biblical Archaeology / AIBA (Jerusalem, southern kingdom excavations)
+- BibleWalks, Biblical Archaeology Society (supplementary context)
+
 ### File-First Workflow
 Prefer these patterns:
 - ✅ Write research findings to `data/sources.md`
