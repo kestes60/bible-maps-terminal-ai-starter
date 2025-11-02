@@ -1,4 +1,3 @@
-
 # node / web stuff
 node_modules/
 dist/
@@ -6,13 +5,40 @@ dist/
 .next/
 .vercel/
 .netlify/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # OS
 .DS_Store
+Thumbs.db
 
-# env
+# env files
 .env
 .env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Claude Code workspace
+# Claude / AI workspace
 .claude/
+SESSION_APPEND_*.md
+SESSION_SUMMARY_DRAFT_*.md
+
+# Editor configs
+.vscode/
+.idea/
+*.swp
+
+# Python http.server cache (if you run local testing)
+__pycache__/
+
+# expanded ignore rules
+SESSION_APPEND_*.md
+SESSION_SUMMARY_DRAFT_*.md
+.vscode/
+.idea/
+*.log
+__pycache__/
