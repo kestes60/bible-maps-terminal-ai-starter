@@ -17,15 +17,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Development Workflow
 ```bash
-# View the web prototype (static HTML)
-# Open web/index.html in a browser - no build step required yet
+# Test the web prototype (static HTML)
+# Option 1: Direct file open (may have CORS issues)
+open web/index.html  # macOS
+xdg-open web/index.html  # Linux
+start web/index.html  # Windows
 
-# (Future) When dependencies are added, install with:
-# npm install
+# Option 2: Local HTTP server (recommended)
+cd web
+python3 -m http.server 8000
+# Visit: http://localhost:8000
 
-# (Future) When build system added, use:
-# npm run build
-# npm run dev
+# Expected: 9 markers on map, color-coded by confidence
+# Click markers for popups with scripture refs and sources
 ```
 
 ### Git Workflow
@@ -91,11 +95,17 @@ The project uses three specialized agents (define via `/agents` in Claude Code):
 
 ### Web Layer (`web/`)
 
-Currently a static prototype with:
-- `index.html` - HTML5 shell with placeholder map container
-- `main.js` - Boot script (no map library loaded yet)
+Functional Leaflet-based interactive map prototype:
+- `index.html` (186 lines) - Full HTML5 shell with Leaflet CDN integration, responsive styling, confidence legend
+- `main.js` (235 lines) - Complete map implementation with GeoJSON loading, confidence-based markers, interactive popups
+- `README.md` - Quick start guide for testing the prototype
 
-**Next step**: Choose and integrate a map library (Leaflet, MapLibre GL JS, or similar) with appropriate tile provider license.
+**Map Features**:
+- OpenStreetMap tile provider with proper attribution
+- Color-coded confidence markers (blue/orange/red)
+- Rich popups with scripture refs, uncertainty radius, scholarly hypotheses
+- Auto-zoom to fit all displayed locations
+- No build step required - static HTML prototype
 
 ### Task Management (`tasks/`)
 
@@ -148,6 +158,18 @@ Prefer these patterns:
 
 ## Key Decisions Made
 
+### Day 2 (2025-11-01) - Leaflet MVP Implementation
+1. **Map Library Selection**: Leaflet chosen over MapLibre GL JS for MVP
+   - Decision criteria: Speed to prototype (15-30 min), simpler learning curve, better PWA caching, lower mobile battery drain
+   - Migration path: GeoJSON data format remains portable for future scaling
+2. **Tile Provider**: OpenStreetMap with proper attribution and licensing compliance
+3. **Confidence Visualization**: Color-coded marker system (blue=high ≥80%, orange=medium 50-79%, red=low <50%)
+4. **UI/UX Standards**:
+   - Rich popups showing scripture references, uncertainty radius, multiple hypotheses, source citations
+   - Confidence legend with visual indicators
+   - Attribution footer with all data source credits
+5. **Performance Optimization**: Static HTML prototype with no build step required, instant loading
+
 ### Day 1 (2025-11-01) - Foundation
 1. **Source Strategy**: OpenBible.info + Pleiades Gazetteer as primary authoritative sources
 2. **Uncertainty Handling**: Multi-hypothesis approach with confidence scoring (0.2-1.0 scale)
@@ -174,22 +196,38 @@ Prefer these patterns:
 3. Review `tasks/TODO.md` for backlog
 4. Use starter prompts from `prompts/` if needed
 
+## Next 3 Tasks (Day 3 Priorities)
+
+1. **Cross-browser Testing** (15 min)
+   - Test in Chrome, Firefox, Safari, mobile browsers
+   - Verify marker display, popup functionality, responsiveness
+   - Document any browser-specific issues
+
+2. **Data Validation** (10 min)
+   - Verify all 9 displayed locations have correct coordinates
+   - Confirm confidence levels match scholarly sources
+   - Test all popup content displays correctly
+
+3. **Offline PWA Strategy** (30 min)
+   - Implement service worker for tile caching
+   - Enable offline map functionality
+   - Test offline experience
+
 ## Open Questions (Current)
 
-### Map Implementation (Priority for Day 2)
-- Map library: Leaflet vs MapLibre GL JS - which better suits project needs?
-- Tile provider: OpenStreetMap vs Mapbox vs Stamen - what licensing constraints?
-- Uncertainty visualization: How to represent multiple location hypotheses on the map?
-- Confidence levels: Best practices for visual representation?
+### Map Implementation ~~(Priority for Day 2)~~ ✅ RESOLVED
+- ~~Map library: Leaflet vs MapLibre GL JS~~ → **Leaflet selected for MVP**
+- ~~Tile provider: OpenStreetMap vs Mapbox vs Stamen~~ → **OpenStreetMap selected**
+- ~~Uncertainty visualization~~ → **Color-coded markers with confidence legend implemented**
+- ~~Confidence levels~~ → **Visual representation complete**
 
-### Route Visualization
-- How to visualize Joshua's campaign route from Josh 10:9-43?
-- Should routes be symbolic or attempt historical accuracy?
-
-### Temporal Context
-- Should we show multiple time periods (Late Bronze vs Iron Age)?
-- How to handle coordinates that may have changed over millennia?
+### Progressive Enhancement (Priority for Day 3+)
+- **PWA Offline Strategy**: Service worker implementation for tile caching
+- **Route Visualization**: How to visualize Joshua's campaign route from Josh 10:9-43?
+- **Performance Scaling**: When to migrate to MapLibre GL JS (threshold: 100+ locations)?
+- **3D Terrain**: Should we add elevation data and hillshading for landscape context?
 
 ### Data Expansion
-- Primary open datasets for ancient Near East geography (GeoJSON/CSV)?
-- How to encode multiple scholarly opinions per site? (Addressed: using hypotheses array)
+- Primary open datasets for additional ancient Near East geography?
+- How to visualize temporal changes (Late Bronze vs Iron Age)?
+- Route accuracy: Symbolic paths vs attempted historical reconstruction?
