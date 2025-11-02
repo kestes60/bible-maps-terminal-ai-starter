@@ -13,63 +13,32 @@ const map = L.map('map', {
 
 // Add OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors',
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 19
 }).addTo(map);
 
-// Add legend control
-const legend = L.control({ position: 'bottomright' });
-
-legend.onAdd = function (map) {
-  const div = L.DomUtil.create('div', 'legend');
-  div.innerHTML = `
-    <h4>Confidence Level</h4>
-    <div class="legend-item">
-      <div class="legend-marker high"></div>
-      <span>High (≥0.8)</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-marker medium"></div>
-      <span>Medium (0.5-0.79)</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-marker low"></div>
-      <span>Low (<0.5)</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-marker uncertain"></div>
-      <span>Uncertain (no geometry)</span>
-    </div>
-  `;
-  return div;
-};
-
-legend.addTo(map);
-
-// Helper: Get confidence level category
-function getConfidenceCategory(confidence) {
-  if (confidence >= 0.8) return 'high';
-  if (confidence >= 0.5) return 'medium';
-  return 'low';
-}
-
-// Helper: Get marker color based on confidence
-function getMarkerColor(confidence) {
-  if (confidence >= 0.8) return '#2563eb'; // blue
-  if (confidence >= 0.5) return '#f59e0b'; // orange
-  return '#ef4444'; // red
+/**
+ * Returns CSS color for Leaflet marker based on confidence score.
+ * - High (≥0.8):   #137b3a (green)
+ * - Medium (≥0.5): #b35c00 (amber)
+ * - Low (<0.5):    #6b7280 (gray)
+ */
+function getConfidenceColor(confidence) {
+  if (confidence >= 0.8) return '#137b3a';
+  if (confidence >= 0.5) return '#b35c00';
+  return '#6b7280';
 }
 
 // Helper: Get marker opacity based on confidence
 function getMarkerOpacity(confidence) {
   if (confidence >= 0.8) return 1.0;
-  if (confidence >= 0.5) return 0.7;
-  return 0.5;
+  if (confidence >= 0.5) return 0.8;
+  return 0.6;
 }
 
 // Helper: Create custom marker icon
 function createMarkerIcon(confidence) {
-  const color = getMarkerColor(confidence);
+  const color = getConfidenceColor(confidence);
   const opacity = getMarkerOpacity(confidence);
 
   return L.divIcon({
@@ -89,10 +58,9 @@ function createMarkerIcon(confidence) {
   });
 }
 
-// Helper: Create popup HTML
+// Helper: Create popup HTML using POPUPS.md template
 function createPopupHTML(feature) {
   const props = feature.properties;
-  const hasGeometry = feature.geometry !== null;
 
   // Get highest confidence from hypotheses
   let maxConfidence = 0;
@@ -100,136 +68,126 @@ function createPopupHTML(feature) {
     maxConfidence = Math.max(...props.hypotheses.map(h => h.confidence));
   }
 
-  const confidenceCategory = getConfidenceCategory(maxConfidence);
-  const confidenceClass = `confidence-${confidenceCategory}`;
   const confidencePercent = (maxConfidence * 100).toFixed(0);
+  const confidenceDecimal = maxConfidence.toFixed(2);
 
-  let html = `<div class="popup-title">${props.label}</div>`;
+  // Build popup HTML using template from POPUPS.md
+  let html = `<div class="place-popup" role="group" aria-label="Place details" data-confidence="${confidenceDecimal}">
+    <header class="popup-header">
+      <h2 class="place-title">${props.label}</h2>
+      <span class="confidence-badge" title="Model confidence">${confidencePercent}%</span>
+    </header>`;
 
   // Scripture references
   if (props.scripture_refs && props.scripture_refs.length > 0) {
-    html += `<div class="popup-section">
-      <span class="popup-label">Scripture:</span> ${props.scripture_refs.join(', ')}
-    </div>`;
-  }
+    html += `
+    <section class="scripture-refs">
+      <h3 class="sr-only">Scripture references</h3>
+      <ul class="refs-list">`;
 
-  // Confidence
-  html += `<div class="popup-section">
-    <span class="popup-label">Confidence:</span>
-    <span class="popup-confidence ${confidenceClass}">${confidencePercent}%</span>
-  </div>`;
-
-  // Uncertainty radius
-  if (props.uncertainty_radius_m !== null && props.uncertainty_radius_m !== undefined) {
-    html += `<div class="popup-section">
-      <span class="popup-label">Uncertainty:</span> ±${props.uncertainty_radius_m}m
-    </div>`;
-  }
-
-  // Notes
-  if (props.notes) {
-    html += `<div class="popup-section">
-      <span class="popup-label">Notes:</span> ${props.notes}
-    </div>`;
-  }
-
-  // Hypotheses (show multiple location theories)
-  if (props.hypotheses && props.hypotheses.length > 1) {
-    html += `<div class="popup-hypotheses">
-      <strong>Scholarly Hypotheses:</strong>`;
-
-    props.hypotheses.forEach((hyp, index) => {
-      const hypConfidence = (hyp.confidence * 100).toFixed(0);
-      html += `<div class="hypothesis-item">
-        <strong>${index + 1}.</strong> ${hyp.source} (${hypConfidence}% confidence)<br/>
-        <small>${hyp.notes}</small>
-      </div>`;
+    props.scripture_refs.forEach(ref => {
+      html += `<li>${ref}</li>`;
     });
 
-    html += `</div>`;
+    html += `</ul>
+    </section>`;
   }
 
-  // Sources
-  if (props.sources && props.sources.length > 0) {
-    html += `<div class="popup-sources">
-      <strong>Sources:</strong> ${props.sources.join(', ')}
-    </div>`;
+  // Alternative hypotheses (if more than one exists)
+  if (props.hypotheses && props.hypotheses.length > 1) {
+    html += `
+    <details class="alt-hypotheses">
+      <summary>Alternative hypotheses</summary>
+      <ul class="hypothesis-list">`;
+
+    props.hypotheses.forEach(hyp => {
+      const hypConfidence = (hyp.confidence * 100).toFixed(0);
+      html += `<li>
+        <span class="name">${hyp.source}</span> •
+        <span class="confidence">${hypConfidence}%</span>
+        ${hyp.notes ? `<br/><small>${hyp.notes}</small>` : ''}
+      </li>`;
+    });
+
+    html += `</ul>
+    </details>`;
   }
 
-  // Special note for uncertain locations
-  if (!hasGeometry) {
-    html += `<div class="popup-section" style="color: #ef4444; font-weight: 500;">
-      ⚠️ Location uncertain - no preferred geometry
-    </div>`;
-  }
+  html += `</div>`;
 
   return html;
 }
 
-// Load and display GeoJSON data
+// Load and display GeoJSON data using L.geoJSON
 fetch('../data/places.example.geojson')
   .then(response => response.json())
   .then(data => {
     console.log('Loaded GeoJSON data:', data);
 
-    // Track bounds for auto-zoom
-    const bounds = L.latLngBounds();
-    let markerCount = 0;
+    // Use L.geoJSON with pointToLayer for cleaner implementation
+    const geojsonLayer = L.geoJSON(data, {
+      // Only render features with geometry (confidence >= 0.5)
+      filter: function(feature) {
+        return feature.geometry !== null && feature.geometry.type === 'Point';
+      },
 
-    // Add each feature to the map
-    data.features.forEach(feature => {
-      const props = feature.properties;
+      // Convert each point to a marker with custom icon
+      pointToLayer: function(feature, latlng) {
+        const props = feature.properties;
 
-      // Skip features without geometry (uncertain locations like Makkedah)
-      if (!feature.geometry || feature.geometry.type !== 'Point') {
-        console.log(`Skipping ${props.label} (no geometry)`);
-        return;
+        // Get confidence from hypotheses
+        let maxConfidence = 0;
+        if (props.hypotheses && props.hypotheses.length > 0) {
+          maxConfidence = Math.max(...props.hypotheses.map(h => h.confidence));
+        }
+
+        // Create marker with custom icon
+        const marker = L.marker(latlng, {
+          icon: createMarkerIcon(maxConfidence),
+          title: props.label
+        });
+
+        // Add popup
+        marker.bindPopup(createPopupHTML(feature), {
+          maxWidth: 300,
+          className: 'custom-popup'
+        });
+
+        console.log(`Added marker for ${props.label} at [${latlng.lat}, ${latlng.lng}] (confidence: ${maxConfidence})`);
+
+        return marker;
       }
-
-      const coords = feature.geometry.coordinates;
-      const latLng = [coords[1], coords[0]]; // GeoJSON is [lon, lat], Leaflet needs [lat, lon]
-
-      // Get confidence from hypotheses
-      let maxConfidence = 0;
-      if (props.hypotheses && props.hypotheses.length > 0) {
-        maxConfidence = Math.max(...props.hypotheses.map(h => h.confidence));
-      }
-
-      // Create marker with custom icon
-      const marker = L.marker(latLng, {
-        icon: createMarkerIcon(maxConfidence),
-        title: props.label
-      });
-
-      // Add popup
-      marker.bindPopup(createPopupHTML(feature), {
-        maxWidth: 300,
-        className: 'custom-popup'
-      });
-
-      // Add to map
-      marker.addTo(map);
-
-      // Extend bounds
-      bounds.extend(latLng);
-      markerCount++;
-
-      console.log(`Added marker for ${props.label} at ${latLng} (confidence: ${maxConfidence})`);
     });
 
+    // Add layer to map
+    geojsonLayer.addTo(map);
+
     // Fit map to markers with padding
-    if (markerCount > 0) {
-      map.fitBounds(bounds, {
+    if (geojsonLayer.getBounds().isValid()) {
+      map.fitBounds(geojsonLayer.getBounds(), {
         padding: [50, 50],
         maxZoom: 10
       });
     }
 
-    console.log(`Loaded ${markerCount} locations successfully`);
+    console.log(`Loaded ${Object.keys(geojsonLayer._layers).length} locations successfully`);
   })
   .catch(error => {
     console.error('Error loading GeoJSON:', error);
     alert('Error loading map data. Please check the console for details.');
   });
+
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registered:', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+  });
+}
 
 console.log('Bible Maps initialized');

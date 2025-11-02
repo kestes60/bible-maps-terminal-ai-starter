@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Bible Maps - Joshua 10 Campaign</title>
 
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json">
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -43,40 +46,70 @@
       width: 100%;
     }
 
-    /* Legend */
-    .legend {
-      background: white;
-      padding: 12px;
-      border-radius: 4px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-      font-size: 0.875rem;
-      line-height: 1.6;
+    /* Floating Legend from LEGEND.md */
+    .leaflet-legend {
+      position: fixed;
+      right: max(12px, env(safe-area-inset-right));
+      bottom: max(12px, env(safe-area-inset-bottom));
+      z-index: 1000;
+
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      padding: 8px 10px;
+
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.2;
+      color: #222;
+      max-width: 90vw;
+      user-select: none;
+      touch-action: manipulation;
     }
 
-    .legend h4 {
-      margin: 0 0 8px 0;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .legend-item {
+    .leaflet-legend .legend-row {
       display: flex;
       align-items: center;
+      gap: 8px;
       margin: 4px 0;
     }
 
-    .legend-marker {
+    .leaflet-legend .legend-swatch {
       width: 12px;
       height: 12px;
-      border-radius: 50%;
-      margin-right: 8px;
-      border: 2px solid rgba(0,0,0,0.3);
+      border-radius: 2px;
+      background: var(--swatch, #999);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     }
 
-    .legend-marker.high { background: #2563eb; }
-    .legend-marker.medium { background: #f59e0b; opacity: 0.7; }
-    .legend-marker.low { background: #ef4444; opacity: 0.5; }
-    .legend-marker.uncertain { background: #999; border-style: dashed; }
+    .leaflet-legend .legend-label {
+      white-space: nowrap;
+    }
+
+    .leaflet-legend .legend-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #555;
+      display: none;
+    }
+
+    .leaflet-legend.legend--show-note .legend-note {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .leaflet-legend {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+      .leaflet-legend .legend-swatch {
+        width: 14px;
+        height: 14px;
+      }
+    }
 
     /* Attribution footer */
     .attribution-footer {
@@ -101,61 +134,15 @@
       text-decoration: underline;
     }
 
-    /* Popup styling */
-    .leaflet-popup-content {
-      margin: 12px;
-      line-height: 1.5;
-    }
-
-    .popup-title {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: #1f2937;
-    }
-
-    .popup-section {
-      margin: 8px 0;
-      font-size: 0.875rem;
-    }
-
-    .popup-label {
-      font-weight: 500;
-      color: #6b7280;
-    }
-
-    .popup-confidence {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 3px;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    .confidence-high { background: #dbeafe; color: #1e40af; }
-    .confidence-medium { background: #fef3c7; color: #92400e; }
-    .confidence-low { background: #fee2e2; color: #991b1b; }
-
-    .popup-sources {
-      font-size: 0.75rem;
-      color: #6b7280;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .popup-hypotheses {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 0.8rem;
-    }
-
-    .hypothesis-item {
-      margin: 4px 0;
-      padding-left: 8px;
-      border-left: 2px solid #e5e7eb;
-    }
+    /* Popup styling from POPUPS.md */
+    .place-popup { max-width: 260px; line-height: 1.4; font-size: 14px; }
+    .popup-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .place-title { margin: 0; font-size: 16px; line-height: 1.2; }
+    .confidence-badge { background: #eef6ff; color: #0b63c9; border-radius: 12px; padding: 2px 8px; font-weight: 600; font-size: 12px; }
+    .refs-list, .hypothesis-list { margin: 8px 0 0 0; padding: 0; list-style: none; }
+    .refs-list li, .hypothesis-list li { margin: 4px 0; }
+    .alt-hypotheses summary { cursor: pointer; margin-top: 6px; font-weight: 600; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body>
@@ -169,17 +156,19 @@
   <div id="map"></div>
 
   <div class="attribution-footer">
-    Map tiles: <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a> |
+    Map tiles: © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors |
     Data: <a href="https://www.openbible.info/geo/" target="_blank">OpenBible.info</a>,
     <a href="https://pleiades.stoa.org/" target="_blank">Pleiades Gazetteer</a>,
-    <a href="https://armstronginstitute.org/" target="_blank">AIBA</a> |
-    <a href="https://github.com" target="_blank">View on GitHub</a>
+    <a href="https://armstronginstitute.org/" target="_blank">AIBA</a>
   </div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
+
+  <!-- Inject floating legend -->
+  <script>document.body.insertAdjacentHTML('beforeend','<div class="leaflet-legend" id="map-legend" role="note" aria-label="Map legend"><div class="legend-row"><span class="legend-swatch" style="--swatch:#137b3a"></span><span class="legend-label">High (≥0.8)</span></div><div class="legend-row"><span class="legend-swatch" style="--swatch:#b35c00"></span><span class="legend-label">Medium (≥0.5)</span></div><div class="legend-row"><span class="legend-swatch" style="--swatch:#6b7280"></span><span class="legend-label">Low/Unknown</span></div><div class="legend-note">Not plotted (uncertain)</div></div>');</script>
 
   <script src="./main.js"></script>
 </body>
