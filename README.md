@@ -1,45 +1,35 @@
+# Bible Maps — Joshua 10 (MVP)
 
-# Bible Maps — Terminal AI Starter
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Status](https://img.shields.io/badge/status-MVP-blue)
+![PWA](https://img.shields.io/badge/PWA-ready-5a0)
 
-This scaffold sets up a **Claude Code–first** workflow (Gemini CLI optional) for a real project: an interactive Bible Maps experience (PWA later), starting with Joshua 10 and expanding to a broader atlas.
+Interactive map of Joshua 10 cities with citations and uncertainty visualization. Built with **Leaflet**, **GeoJSON**, and a **PWA** service worker for basic offline use.
 
-## Quick Start
-1. **Unzip** and `cd` into this folder in your terminal.
-2. **Initialize Git (optional but recommended):**
-   ```bash
-   git init && git add . && git commit -m "init: bible maps terminal-ai starter"
-   ```
-3. **Launch Claude Code in this folder:**
-   ```bash
-   claude
-   ```
-4. In Claude Code, run:
-   - `/init` (seeds `claude.md` from this repo)
-   - `Shift+Tab` → **Plan** → approve → execute
-   - `/agents` → **Create** agents from files in `agents/` (open each file and paste contents when prompted)
-5. **Daily ritual**
-   - Work in small loops.
-   - Ask Claude to update `claude.md` with **Decisions**, **Next 3 tasks**, **Open Questions**.
-   - End day with **Session Closer** agent (it updates `SESSION_SUMMARY.md` and `claude.md`).
+## Demo
+- **Local preview:** `python3 -m http.server 8080` then open http://localhost:8080/web/
+- **Screenshot:**
+  ![screenshot](docs/screenshot.png)
 
-## Folder Map
-- `claude.md` — living context file (Claude auto-loads this in the folder).
-- `SESSION_SUMMARY.md` — rolling session log (high level).
-- `agents/` — copy/paste agent definitions into Claude Code's `/agents` creator.
-- `prompts/` — starter prompts you can paste to kick initiatives.
-- `data/` — raw assets (geojson, csv, notes, citations).
-- `tasks/TODO.md` — backlog you can triage in Plan mode.
+## Features
+- Popups with scripture refs & confidence
+- Legend w/ color coding (High/Medium/Low)
+- PWA: manifest + service worker caching (tiles & GeoJSON)
 
-## Gemini CLI (optional, free)
-If you want a second engine for web-heavy work:
+## Data Sources
+OpenBible.info, Pleiades Gazetteer, and AIBA (see `data/sources.md`).
+
+## Quickstart
 ```bash
-npm install -g @google/gemini-cli
-gemini
-/init
-```
-Use it to write files like: “Research biblical geospatial data sources; write to `data/sources.md` and update `gemini.md` with citations.”
+git clone https://github.com/kestes60/bible-maps-terminal-ai-starter
+cd bible-maps-terminal-ai-starter
+python3 -m http.server 8080
+# visit http://localhost:8080/web/
 
-## Safety
-- **Keep permissions ON** (review file writes/commands). Only use dangerous skip in a throwaway sandbox.
-- Keep this project within a dedicated folder (don’t point tools at your entire home directory).
-- Commit early/often with meaningful messages.
+---
+
+### 🧭 See Also
+
+For developers working with Claude, Cursor, or WSL:
+
+➡️ [Developer Workflow Guide (README-dev.md)](./README-dev.md)
