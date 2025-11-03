@@ -1,0 +1,37 @@
+name: Build & Verify
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install -g http-server
+          echo "✅ Dependencies installed"
+
+      - name: Verify project structure
+        run: |
+          echo "Checking files..."
+          test -f web/index.html && test -f web/main.js && test -f web/manifest.json && echo "✅ All core files present"
+
+      - name: Start build verification
+        run: |
+          echo "Launching local test server..."
+          npx http-server ./web -p 8080 &
+          sleep 5
+          curl -I http://localhost:8080 | grep "200" && echo "✅ Web folder served successfully"
