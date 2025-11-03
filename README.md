@@ -6,6 +6,32 @@
 
 Interactive map of Joshua 10 cities with citations and uncertainty visualization. Built with **Leaflet**, **GeoJSON**, and a **PWA** service worker for basic offline use.
 
+<p align="center">
+  <img src="web/icons/icon-192.png" width="96" alt="Bible Maps Icon"/>
+</p>
+
+<h1 align="center">Bible Maps – Joshua 10 Campaign</h1>
+<p align="center">
+  <em>Interactive Leaflet + PWA prototype built with Claude Code and Cursor</em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/kestes60/bible-maps-terminal-ai-starter/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/kestes60/bible-maps-terminal-ai-starter/deploy.yml?label=Build&logo=github&style=flat-square" alt="Build Status"/>
+  </a>
+  <a href="https://github.com/kestes60/bible-maps-terminal-ai-starter/releases">
+    <img src="https://img.shields.io/github/v/release/kestes60/bible-maps-terminal-ai-starter?label=Version&logo=semantic-release&style=flat-square" alt="Release Version"/>
+  </a>
+  <a href="https://bible-maps-terminal-ai-starter.netlify.app/">
+    <img src="https://img.shields.io/badge/PWA-Ready-success?style=flat-square&logo=pwa" alt="PWA Ready"/>
+  </a>
+  <a href="https://github.com/kestes60/bible-maps-terminal-ai-starter/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/kestes60/bible-maps-terminal-ai-starter?style=flat-square" alt="License"/>
+  </a>
+</p>
+
+---
+
 ## Demo
 - **Local preview:** `python3 -m http.server 8080` then open http://localhost:8080/web/
 - **Screenshot:**
