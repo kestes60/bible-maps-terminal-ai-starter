@@ -1,88 +1,70 @@
-# Bible Maps Web Prototype
+# Developer Workflow Guide (Claude + Cursor)
 
-Interactive map of Joshua 10 campaign locations using Leaflet.
+This document is for internal and development use only.  
+It explains how to work on the **Bible Maps Project** using Claude Code, Cursor AI agents, and a local development setup (WSL + GitHub).
 
-## Quick Start
+---
 
-Open `index.html` in a web browser. No build step required!
+## 🧭 Purpose
+This file documents:
+- The Claude session workflow (Research Guru → Brutal Critic → Session Closer)
+- Agent handoff coordination with ChatGPT and Grok
+- File structure conventions (`handoff/`, `data/`, `tasks/`, `web/`)
+- Session logging and summaries (`SESSION_SUMMARY.md`, `SESSION_APPEND_*.md`)
+- Commit and tagging standards for multi-day builds
 
-**Option 1: Direct File Access**
-```bash
-# Open directly in browser
-open index.html  # macOS
-xdg-open index.html  # Linux
-start index.html  # Windows
-```
+> 💡 Tip: Keep this file updated after each milestone to help future contributors understand the AI-assisted workflow.
 
-**Option 2: Local HTTP Server** (recommended to avoid CORS issues)
-```bash
-# Python 3
-python3 -m http.server 8000
+---
 
-# Python 2
-python -m SimpleHTTPServer 8000
+## 🛠️ Development Environment
 
-# Node.js (if you have http-server installed)
-npx http-server -p 8000
+**Requirements:**
+- Claude Pro account (Claude Code)
+- Cursor editor connected to WSL2 (Ubuntu 22.04)
+- Node.js ≥ 18, Git, and Python 3.10+
+- SSH authentication configured for GitHub
 
-# Then visit: http://localhost:8000
-```
+**Primary folders:**
+| Path | Description |
+|------|--------------|
+| `/data/` | GeoJSON data and sources |
+| `/web/` | Leaflet + PWA front-end |
+| `/handoff/` | Cross-agent handoff markdown files |
+| `/tasks/` | TODO lists and roadmap phases |
+| `/SESSION_*.md` | AI session transcripts and append logs |
 
-## Features
+---
 
-✅ **Interactive Map**
-- 9 Joshua 10 locations displayed (Makkedah excluded due to uncertainty)
-- Color-coded markers by confidence level
-- Click markers for detailed information
+## 🧩 Agent Overview
 
-✅ **Confidence Visualization**
-- **Blue (High ≥80%)**: Jerusalem, Lachish (100% confidence)
-- **Orange (Medium 50-79%)**: Gibeon, Hebron, Jarmuth, Eglon, Debir, Libnah, Azekah (85-92%)
-- **Red (Low <50%)**: Not rendered on map (hypotheses available in data)
+| Agent | Role | Description |
+|-------|------|-------------|
+| `Research Guru` | Data collector | Gathers biblical and geospatial references |
+| `Brutal Critic` | Reviewer | Flags weak arguments and unclear data |
+| `Session Closer` | Summarizer | Finalizes each session and updates `SESSION_SUMMARY.md` |
+| `ChatGPT / Grok` | Collaborators | Generate modular handoff components (styles, popups, etc.) |
+| `Claude (Sonnet)` | Orchestrator | Integrates all handoffs and finalizes commits |
 
-✅ **Rich Popups**
-- Place name and scripture references
-- Confidence percentage
-- Uncertainty radius (±meters)
-- Scholarly hypotheses (when multiple exist)
-- Source attributions
+---
 
-✅ **Map Legend**
-- Bottom-right corner
-- Explains confidence level colors
+## 🔁 Typical Daily Workflow
 
-✅ **Source Attribution**
-- OpenStreetMap tiles
-- OpenBible.info, Pleiades, AIBA data sources
+1. **Start a session** in Claude Code (e.g., “Day 4 – MapLibre Integration”).  
+2. Use `Research Guru` or agents as needed to gather data.  
+3. Generate handoff files (`handoff/STYLES.md`, `handoff/POPUPS.md`, etc.).  
+4. Run `Session Closer` when Claude’s context approaches 90%.  
+5. Commit and push results using versioned tags (`v0.3-day3`, etc.).  
 
-## Technology Stack
+---
 
-- **Leaflet 1.9.4** - Open-source interactive maps
-- **OpenStreetMap** - Free map tiles
-- **Vanilla JavaScript** - No frameworks, fast loading
-- **RFC 7946 GeoJSON** - Standard geospatial data format
+## 🧱 Maintenance Notes
 
-## Data
+- `.claude/` folder should remain **gitignored**.
+- Only session summaries and handoff deliverables should be committed.
+- When Claude Code hits session limits, copy active context into `SESSION_APPEND_YYYY-MM-DD.md` before continuing.
 
-Map loads `../data/places.example.geojson`:
-- 10 Joshua 10 locations
-- WGS84 coordinates (EPSG:4326)
-- Multiple scholarly hypotheses per site
-- Confidence scores based on scholarly consensus
-- Full source citations
+---
 
-## Browser Compatibility
-
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Future Enhancements
-
-See `../tasks/TODO.md` for roadmap:
-- Route visualization (Joshua's campaign path)
-- Terrain/elevation overlays
-- Offline PWA caching
-- Search/filter functionality
-- Timeline slider (Bronze Age vs Iron Age)
+**Maintained by:** Keith Estes  
+**Project Repository:** [kestes60/bible-maps-terminal-ai-starter](https://github.com/kestes60/bible-maps-terminal-ai-starter)
